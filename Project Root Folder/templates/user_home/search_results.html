@@ -1,0 +1,53 @@
+{% extends 'user_base.html' %}
+
+{% block content %}
+  <h2 style="font-weight: bold;"> Results for the  term "{{ query }}" are</h2>
+
+  {% if results %}
+    {% for latest_product in results %}
+    <div class="user_home_card" style="" >
+      
+      <img src="{{ url_for('static', filename='images/' + latest_product[1] + '.jpg') }}" class="card-img-top" alt="Product Image"  style="box-shadow: 10px 10px 5px #929ea0;">
+
+      <div class="card-body">
+          
+            <p style="color: rgb(0, 0, 0); font-weight: bold;">
+            {{ latest_product[1] }}
+          </p>
+          <br>
+          <label>Category: </label><p>{{ get_category_name(latest_product[2]) }}</p>
+          <label>Price per unit: </label><b> Rs {{ latest_product[3] }}</b><br>
+          <label>In Stock: </label><b>{{ latest_product[4] }}</b>
+
+
+          
+    <form method="post" action="{{url_for('user_bp.add_to_cart')}}">
+      <input type="hidden" name="product_id" value="{{latest_product[0] }}">
+
+      <input type="hidden" name="price" value="{{ latest_product[3] }}">
+      <input type="hidden" name="product_name" value="{{ latest_product[1] }}">
+
+    <label> Select quantity</label>
+    <select name="quantity">
+      <option>  1  </option>
+      <option>  2  </option>
+      <option>  3  </option>
+      <option>  4  </option>
+      <option>  5  </option>
+    </select>
+
+    <button class="button is-danger is-outlined" type="submit">Add to cart</button>
+  </form>
+
+
+
+      </div>
+   
+  </div>
+  
+    {% endfor %}
+  {% else %}
+   The product you are looking for isn't available in PEPE Grocery store
+
+  {% endif %}
+{% endblock %}

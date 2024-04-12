@@ -1,0 +1,22 @@
+{% extends 'admin_base.html' %} 
+
+{% block content %}
+
+<center>
+<a href ="{{ url_for('admin.admin_manage_products') }}">
+
+  <button type="button" class="btn btn-secondary btn-lg">
+    Manage Products
+  </button>
+
+</a>
+
+
+<a href="{{ url_for('admin.admin_manage_categories') }}" style="margin-left: 100px;">
+  <button type="button" class="btn btn-secondary btn-lg">
+    Manage Categories
+  </button>
+</a>
+</center>
+
+{% endblock %}

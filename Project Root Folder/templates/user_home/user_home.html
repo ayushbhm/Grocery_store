@@ -1,0 +1,117 @@
+{% extends 'user_base.html' %}
+
+{%block content%}
+<style>
+    .card{
+   display: flex;
+  }
+
+  .carousel-item img {
+    max-width: 35%;
+    max-height: 350px;
+    margin: 0 auto;
+  }
+
+  
+  </style>
+
+
+
+
+
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="static\images\Screenshot 2023-08-08 234814.png" class="d-block w-100" >
+    </div>
+
+    <div class="carousel-item">
+      <img src="static\images\Screenshot 2023-08-08 235536.png" class="d-block w-100" >
+    </div>
+  
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<br>
+
+<hr style="background-color: black; height: 4px;">
+
+
+<div class="latest1" >Latest Products</div>
+
+
+
+
+
+
+<div class="shadow p-2 mb-10 bg-body-tertiary rounded"   style="background-color: rgb(96, 116, 135);  height: auto;"><b>
+</b>
+<br> 
+
+
+
+
+<div class="latest-products"  style="display:flex; flex-wrap: wrap;">
+  
+
+  
+
+  {% for latest_product in latest_products %}
+  <div class="user_home_card" style=" " >
+      <img src="{{ url_for('static', filename='images/' + latest_product[1] + '.jpg') }}"   class="card_image" alt="Product Image"  style="">
+      <div class="card-body">
+          
+            <p style=" font-weight: bold; color: rgb(0, 0, 0); ">
+            {{ latest_product[1] }}
+          </p>
+          <br>
+          <label>Category: </label><p style="font-weight: bolder;">{{ get_category_name(latest_product[2]) }}</p>
+          <label>Price per unit: </label><b> Rs {{ latest_product[3] }}</b><br>
+          <label>In Stock: </label><b>{{ latest_product[4] }}</b>
+
+
+          
+    <form method="post" action="{{url_for('user_bp.add_to_cart')}}">
+      <input  name="product_id" value="{{latest_product[0] }}"  type="hidden">
+
+      <input  name="price"   value="{{ latest_product[3] }}"  type="hidden">
+      <input type="hidden"  name="product_name" value="{{ latest_product[1] }}">
+
+    <label> Select quantity</label>
+    <select name="quantity">
+      <option>  1  </option>
+      <option>  2  </option>
+      <option>  3  </option>
+      <option>  4  </option>
+      <option>  5  </option>
+    </select>
+
+    <button class="button is-danger is-outlined" type="submit">Add to cart</button>
+  </form>
+
+
+
+      </div>
+   
+  </div>
+  
+  {% endfor %}
+</div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+{%endblock%}

@@ -1,0 +1,57 @@
+{% extends 'user_base.html' %}
+{%block content%}
+
+
+
+<table class="table_cart">
+    <tr class="table_row">
+        <th>Cart ID</th>
+        <th>Product name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
+    {% set ns = namespace (sumofcart = 0)  %}
+
+    {% for product in cart %}
+    
+    <tr>
+    <td>{{product[0]}}</td><br>
+        <td>{{ product[5] }}</td>
+        <td>{{ product[3]}}</td>
+        <td>{{ product[4] }}</td>
+        <td> Rs {{ product[3] * product[4] }} </td>
+        <td>
+            <form method="post" action="{{ url_for('user_bp.remove_from_cart', cart_id=product[0]) }}">
+                <button class="button is-danger is-outlined" type="submit">Remove</button>
+            </form>
+        </td>
+    </tr>
+
+   
+    {%   set  ns.sumofcart =  ns.sumofcart + (product[3] * product[4]) | int   %}
+    
+    
+    {% set total_display = total %}
+    {% endfor %} 
+    
+
+</table>
+
+
+
+
+<button class="button is-danger">Cart total: Rs {{ ns.sumofcart }}</button>
+
+<form method="post" action="{{url_for('user_bp.buy_now')}}">
+
+
+
+<center>
+    <button class="btn btn-secondary btn-lg" type="submit">Buy Now </button>
+</center>
+
+</form>
+
+{%endblock%}
+

@@ -1,0 +1,151 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+
+<div style="display: flex; gap: 350px;">  
+<div class="manage_products_box">
+  <div class="alert alert-info" >
+    Add a Product
+  </div>
+  <form action="{{ url_for('admin.admin_create_product') }}" method="POST" enctype="multipart/form-data">
+    <div style="display: block; margin-bottom: 10px;"  >
+    
+      <label >Category:</label>
+      <select name="category_id">
+        {% for category in categories %}
+        <option value="{{ category[0] }}">{{ category[1] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+
+    <div style="display: block;  margin-bottom: 10px;">
+      <label >Product Name:</label>
+      <input type="text" name="product_name" placeholder="Product Name">
+    </div>
+    
+
+    <div style="display: block;  margin-bottom: 10px;">
+      <label >Quantity</label>
+      <input type="text" name="quantity" placeholder="quantity">
+    </div>
+
+
+    <div style="display: block; margin-bottom: 10px;">
+      <label >Price per unit:</label>
+      <input type="text" name="price" placeholder="Price per unit">
+    </div>
+
+
+
+    <div style="display: block;  margin-bottom: 10px;">
+      <label >MFG Date</label>
+      <input type="text" name="mfg_date" placeholder="Manufacturing date">
+    </div>
+
+
+
+    <div style="display: block;  margin-bottom: 10px;">
+      <label >Image:</label>
+      <input type="file" name="image">
+    </div>
+    <div style="display: block;  margin-bottom: 10px;">
+      <button type="submit"  class="btn btn-secondary btn-lg">Add Product</button>
+    </div>
+  </form>
+</h4>
+</div>
+
+
+
+
+
+
+<div class="manage_products_box" >
+  <div class="alert alert-info" >
+    Delete a Product
+  </div>
+  <div style="display: block; margin-bottom: 10px;"  >
+    <form action="{{ url_for('admin.admin_delete_product') }}" method="POST">
+    <label for="products">Delete Product:</label>
+    <select name="product_name">
+      {% for product in products %}
+      <option value="{{ product[1] }}">{{ product[1] }}</option>
+      {% endfor %}
+    </select>
+
+    <div style="display: block;  margin-bottom: 20px;">
+      
+      <button type ="submit"  class="btn btn-secondary btn-lg" >Delete Product</button>
+    </div>
+  </form>
+  </div>
+
+</div>
+</h4>
+</div>
+
+
+</div>
+
+
+<center>
+<div class="manage_products_box" style="margin-top: 8%;" >
+    <div class="alert alert-info" >
+    Update a Product
+  </div>
+  <div style="display: block; margin-bottom: 10px;" >
+  <form action="{{ url_for('admin.admin_edit_product') }}" method="POST" enctype="multipart/form-data">
+    <div style="display: block;  margin-bottom: 10px;">
+      <label for="product">Select Product:</label>
+      <select name="product_id">
+        {% for product in products %}
+          <option value="{{ product[0] }}">{{ product[1]}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div style="display: block;  margin-bottom: 10px;">
+      <label >Product name</label>
+      <input type="text" name="product_name" placeholder="Product Name">
+    </div>   
+    
+    <div style="display: block;  margin-bottom: 10px;">
+      <label for="quantity">Quantity:</label>
+      <input type="text" name="quantity" placeholder="Quantity">
+    </div>
+
+    <div style="display: block;  margin-bottom: 10px;">
+      <label for="price">Price per unit:</label>
+      <input type="text" name="price" placeholder="Price per unit">
+    </div>
+
+    <div style="display: block;  margin-bottom: 10px;">
+      <label for="mgf_date">MFG Date:</label>
+      <input type="text" name="mfg_date" placeholder="Manufacturing date">
+    </div>
+
+    <div style="display: block;  margin-bottom: 10px;">
+      <label for="image">Image:</label>
+      <input type="file" name="image">
+    </div>
+
+  
+
+    <div style="display: block;  margin-bottom: 10px;">
+      <button type="submit"  class="btn btn-secondary btn-lg">Update Product</button>
+    </div>
+  </form>
+</div>
+</div>
+</center>
+
+
+
+
+
+    
+ 
+
+{% endblock %}

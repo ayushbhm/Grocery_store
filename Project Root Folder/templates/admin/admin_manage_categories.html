@@ -1,0 +1,44 @@
+{% extends 'admin_base.html' %}
+{%block content%}
+
+
+<form action="{{ url_for('admin.admin_create_category') }}" method="POST">
+    <label >Category Name:</label>
+    <input type="text" id="category_name" name="category_name" required />
+  
+    <button type="submit" class="btn btn-secondary btn-lg">Add Category</button>
+  </form>
+  
+
+
+
+  <form action="{{ url_for('admin.admin_delete_category') }}" method="POST"  style="margin-top: 30px;  ">
+  
+    <label >Select Category to Delete:</label>
+    <select name="category_id">
+      {% for category in categories %}
+        <option value="{{ category[0] }}">{{ category[1] }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-secondary btn-lg">Delete Category</button>
+  </form>
+
+
+
+
+  <form action="{{ url_for('admin.admin_edit_category') }}" method="POST" style="margin-top: 30px;">
+    <label >Select Category to Edit:</label>
+    <select name="category_id">
+      {% for category in categories %}
+        <option value="{{ category[0] }}">{{ category[1] }}</option>
+      {% endfor %}
+    </select>
+  
+    <label >Change Category Name to:</label>
+    <input type="text" name="new_category_name" placeholder="New Category Name">
+  
+    <button type="submit" class="btn btn-secondary btn-lg">Edit Category</button>
+  </form>
+  
+
+{%endblock%}
